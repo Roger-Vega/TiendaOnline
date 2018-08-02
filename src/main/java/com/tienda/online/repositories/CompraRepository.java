@@ -3,11 +3,9 @@ package com.tienda.online.repositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.tienda.online.models.Rol;
+import com.tienda.online.models.Compra;
 
 @Repository
-public interface RolRepository extends CrudRepository<Rol, Integer> {
+public interface CompraRepository extends CrudRepository<Compra, Integer>{
 
-	Rol findByNombreRol(String rol);
-	
 }
