@@ -2,6 +2,7 @@ package com.tienda.online.controllers;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import com.tienda.online.services.RolService;
 
 @RestController
 @RequestMapping("/api/rol")
-public class RolController {
+public class RolController extends BaseController{
 
 	private RolService rolService;
 	
@@ -26,7 +27,11 @@ public class RolController {
 	
 	@PostMapping
 	public Rol guardarRol(@RequestBody Rol rol) {
-		return rolService.guardar(rol);
+		Rol rolGuardado = rolService.guardar(rol);
+		if(rolGuardado == null) {
+			throw new DataIntegrityViolationException("Ya existe un rol " + rol.getNombreRol());
+		}
+		return rolGuardado;
 	}
 	
 	@GetMapping
@@ -36,11 +41,12 @@ public class RolController {
 	
 	@PutMapping
 	public Rol actualizarRol(@RequestBody Rol rol) {
-		return rolService.guardar(rol);
+		return rolService.actualizarRol(rol);
 	}
 	
 	@DeleteMapping(path = "/{id}")
 	public void eliminarRol(@PathVariable(value="id") Integer id) {
 		rolService.eliminarRol(id);
 	}
+
 }
