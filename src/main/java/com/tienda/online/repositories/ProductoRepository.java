@@ -22,4 +22,6 @@ public interface ProductoRepository extends CrudRepository<Producto, Integer> {
 	//Equivalente al metodo findByCategoriaNombreAndPrecioGreaterThanAndDescuentoLessThan
 	@Query("select p from Producto p where p.categoria.nombre = ?1 and p.precio >= ?2 and p.descuento <= ?3")
 	List<Producto> reporteProductos(String nombreCategoria, BigDecimal precio, Integer descuento );
+	
+	Producto findByNombre(String nombre);
 }

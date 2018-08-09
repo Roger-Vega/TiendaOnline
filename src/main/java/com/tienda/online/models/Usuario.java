@@ -26,6 +26,12 @@ public class Usuario {
 	@JoinColumn(name="rol_id")
 	private Rol rol;
 	
+	public Usuario() {}
+	
+	public Usuario(Integer id) {
+		this.id = id;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -81,5 +87,5 @@ public class Usuario {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-
+	
 }

@@ -8,4 +8,6 @@ import com.tienda.online.models.Usuario;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer>{
 
+	Usuario findByEmail(String email);
+	
 }

@@ -7,5 +7,5 @@ import com.tienda.online.models.IngresoProducto;
 
 @Repository
 public interface IngresoProductoRepository extends CrudRepository<IngresoProducto, Integer> {
-
+	
 }
