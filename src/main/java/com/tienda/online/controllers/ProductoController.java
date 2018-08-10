@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tienda.online.dto.response.DataResponse;
+import com.tienda.online.dto.response.DataResponseList;
 import com.tienda.online.models.Producto;
 import com.tienda.online.services.ProductoService;
 
@@ -23,17 +25,18 @@ public class ProductoController extends BaseController{
 	}
 	
 	@PostMapping
-	public Producto guardarProducto(@RequestBody Producto producto) {
+	public DataResponse<Producto> guardarProducto(@RequestBody Producto producto) {
 		Producto productoGuardado = productoService.guardar(producto);
 		if(productoGuardado == null) {
 			throw new DataIntegrityViolationException("Ya existe un producto con nombre " + producto.getNombre());
 		}
-		return productoGuardado;
+		return new DataResponse<Producto>(productoGuardado);
 	}
 	
 	@GetMapping
-	public List<Producto> obtenerProductos(){
-		return productoService.obtenerProductos();
+	public DataResponseList<Producto> obtenerProductos(){
+		List<Producto> productoLista = productoService.obtenerProductos(); 
+		return new DataResponseList<Producto>(productoLista, productoLista.size());
 	}
 	
 	

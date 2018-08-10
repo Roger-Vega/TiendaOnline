@@ -72,6 +72,12 @@ public class Compra {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	public List<DetalleCompra> getDetalleCompraList() {
+		return detalleCompraList;
+	}
+	public void setDetalleCompraList(List<DetalleCompra> detalleCompraList) {
+		this.detalleCompraList = detalleCompraList;
+	}
 
 	
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tienda.online.dto.response.DataResponse;
+import com.tienda.online.dto.response.DataResponseList;
 import com.tienda.online.models.Rol;
 import com.tienda.online.services.RolService;
 
@@ -26,22 +28,23 @@ public class RolController extends BaseController{
 	}
 	
 	@PostMapping
-	public Rol guardarRol(@RequestBody Rol rol) {
+	public DataResponse<Rol> guardarRol(@RequestBody Rol rol) {
 		Rol rolGuardado = rolService.guardar(rol);
 		if(rolGuardado == null) {
 			throw new DataIntegrityViolationException("Ya existe un rol " + rol.getNombreRol());
 		}
-		return rolGuardado;
+		return new DataResponse<Rol>(rolGuardado);
 	}
 	
 	@GetMapping
-	public List<Rol> obtenerRoles(){
-		return rolService.obtenerRoles();
+	public DataResponseList<Rol> obtenerRoles(){
+		List<Rol> rolLista = rolService.obtenerRoles(); 
+		return new DataResponseList<Rol>(rolLista, rolLista.size());
 	}
 	
 	@PutMapping
-	public Rol actualizarRol(@RequestBody Rol rol) {
-		return rolService.actualizarRol(rol);
+	public DataResponse<Rol> actualizarRol(@RequestBody Rol rol) {
+		return new DataResponse<Rol>(rolService.actualizarRol(rol));
 	}
 	
 	@DeleteMapping(path = "/{id}")

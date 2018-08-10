@@ -33,10 +33,14 @@ public class ProductoService {
 				ingresoProducto.setUsuario(new Usuario(10));
 				
 				ingresoProductoService.guardarIngreso(ingresoProducto, newProducto);
+				return newProducto;
 			}
+		}else {
+			return productoRepository.save(producto);
 		}
 		return null;
 	}
+	
 	
 	public List<Producto> obtenerProductos(){
 		return (List<Producto>) productoRepository.findAll();

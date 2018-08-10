@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class DetalleCompra {
 
@@ -23,6 +25,7 @@ public class DetalleCompra {
 	private Producto producto;
 	@ManyToOne
 	@JoinColumn(name="compra_id")
+	@JsonIgnore
 	private Compra compra;
 	
 	public Integer getId() {
